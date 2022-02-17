@@ -17,7 +17,20 @@ const Container = styled.div`
 
 const DescriptionContainer = styled.div``;
 
-const SampleCard: React.FC = () => {
+type Props = {
+  title: string;
+  description: string;
+  link: string;
+
+  fadeDirection: "left" | "right" | "up" | "down";
+};
+
+const SampleCard: React.FC<Props> = ({
+  title,
+  description,
+  link,
+  fadeDirection,
+}) => {
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -25,7 +38,7 @@ const SampleCard: React.FC = () => {
   }, []);
 
   return (
-    <div data-aos="fade-left" data-aos-delay="200">
+    <div data-aos={"fade-" + fadeDirection} data-aos-delay="300">
       <Container>
         <img
           src={"https://i.ytimg.com/vi_webp/qLrzmnYgPdI/sddefault.webp"}
