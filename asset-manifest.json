@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/shunichi/static/css/main.d06e463e.css",
+    "main.js": "/shunichi/static/js/main.8ba46223.js",
+    "static/js/415.ba58abb8.chunk.js": "/shunichi/static/js/415.ba58abb8.chunk.js",
+    "static/js/787.2ffd7e33.chunk.js": "/shunichi/static/js/787.2ffd7e33.chunk.js",
+    "index.html": "/shunichi/index.html",
+    "main.d06e463e.css.map": "/shunichi/static/css/main.d06e463e.css.map",
+    "main.8ba46223.js.map": "/shunichi/static/js/main.8ba46223.js.map",
+    "415.ba58abb8.chunk.js.map": "/shunichi/static/js/415.ba58abb8.chunk.js.map",
+    "787.2ffd7e33.chunk.js.map": "/shunichi/static/js/787.2ffd7e33.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d06e463e.css",
+    "static/js/main.8ba46223.js"
+  ]
+}
