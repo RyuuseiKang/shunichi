@@ -5,6 +5,8 @@ import styled from "styled-components";
 
 import Particles from "react-tsparticles";
 import {Link} from "react-router-dom";
+import {useMediaQuery} from "react-responsive";
+import useWindowDimensions from "../hooks/windowDimensions";
 
 const Container = styled.div`
   display: flex;
@@ -31,9 +33,9 @@ const Header = styled.div`
 
 const HeaderPadder = styled.div`
   max-width: 880px;
-  min-width: 340px;
+  min-width: 290px;
   width: 100%;
-  padding: 0px 22px;
+  margin: 0px 22px;
 
   display: flex;
 
@@ -63,18 +65,22 @@ const ButtonDescription = styled.span`
 
 const CharacterContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   padding-top: 50px;
   justify-content: center;
   z-index: 1;
 `;
 
 const CharacterImage = styled.div`
-  flex: 1;
+  justify-content: center;
 `;
 
 const CharacterDescription = styled.div`
   flex: 1;
-  padding-top: 150px;
+  align-items: center;
+  min-width: 100px;
+  width: 50%;
+  padding: 50px 20px;
 `;
 
 const CharacterName = styled.span`
@@ -85,6 +91,7 @@ const CharacterName = styled.span`
 
 const TagContainer = styled.div`
   padding-bottom: 15px;
+  text-shadow: 0px 0px 10px #333333;
 `;
 
 const TagTitle = styled.span`
@@ -105,6 +112,9 @@ const TagDescription = styled.p`
 `;
 
 const Main: React.FC = () => {
+  const {height, width} = useWindowDimensions();
+  const isMobile = useMediaQuery({maxWidth: 767});
+
   return (
     <Container>
       <Particles
@@ -164,8 +174,10 @@ const Main: React.FC = () => {
       <CharacterContainer>
         <CharacterImage>
           <img
+            style={{margin: -10}}
             src="https://static.wixstatic.com/media/2c6226_362a05829cbb4fa798450b4527220009~mv2_d_3500_7016_s_4_2.png/v1/crop/x_0,y_6,w_3033,h_7010/fill/w_520,h_1202,al_c,q_90,usm_0.66_1.00_0.01/Shunichi_Dominat.webp"
             alt="character"
+            width={isMobile ? width * 0.7 : "100%"}
           />
         </CharacterImage>
         <CharacterDescription>
