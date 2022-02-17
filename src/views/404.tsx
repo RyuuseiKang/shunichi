@@ -1,6 +1,7 @@
 import React from "react";
 
 import {useTranslation} from "react-i18next";
+import {Link} from "react-router-dom";
 
 import styled from "styled-components";
 
@@ -47,13 +48,11 @@ const NotFound: React.FC = () => {
     <Container>
       <Title>404</Title>
       <Description>{t("페이지를 찾을 수 없어요.")}</Description>
-      <BackHomeButton
-        onClick={() => {
-          window.location.href = "/";
-        }}
-      >
-        <Description>{t("홈으로 돌아가기")}</Description>
-      </BackHomeButton>
+      <Link to="/">
+        <BackHomeButton>
+          <Description>{t("홈으로 돌아가기")}</Description>
+        </BackHomeButton>
+      </Link>
     </Container>
   );
 };

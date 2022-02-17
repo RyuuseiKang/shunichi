@@ -4,6 +4,7 @@ import React from "react";
 import styled from "styled-components";
 
 import Particles from "react-tsparticles";
+import {Link} from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -150,13 +151,9 @@ const Main: React.FC = () => {
             <CharacterName>{t("마루네 슌이치")}</CharacterName>
           </div>
           <Button>
-            <ButtonDescription
-              onClick={() => {
-                window.location.href = "/download";
-              }}
-            >
-              {t("VB 다운로드")}
-            </ButtonDescription>
+            <Link to="/download">
+              <ButtonDescription>{t("VB 다운로드")}</ButtonDescription>
+            </Link>
           </Button>
         </HeaderPadder>
       </Header>
