@@ -7,6 +7,7 @@ import Particles from "react-tsparticles";
 import {Link} from "react-router-dom";
 import {useMediaQuery} from "react-responsive";
 import useWindowDimensions from "../hooks/windowDimensions";
+import SampleCard from "../components/SampleCard";
 
 const Container = styled.div`
   display: flex;
@@ -17,6 +18,8 @@ const Container = styled.div`
   background: #262526;
   color: #fff;
 `;
+
+const Contents = styled.div``;
 
 const Header = styled.div`
   background: rgba(33, 33, 33, 0.3);
@@ -111,8 +114,10 @@ const TagDescription = styled.p`
   font-size: 1.1em;
 `;
 
+const SampleContainer = styled.div``;
+
 const Main: React.FC = () => {
-  const {height, width} = useWindowDimensions();
+  const {width} = useWindowDimensions();
   const isMobile = useMediaQuery({maxWidth: 767});
 
   return (
@@ -171,56 +176,65 @@ const Main: React.FC = () => {
           </Link>
         </HeaderPadder>
       </Header>
-      <CharacterContainer>
-        <CharacterImage>
-          <img
-            style={{margin: -10}}
-            src="https://static.wixstatic.com/media/2c6226_362a05829cbb4fa798450b4527220009~mv2_d_3500_7016_s_4_2.png/v1/crop/x_0,y_6,w_3033,h_7010/fill/w_520,h_1202,al_c,q_90,usm_0.66_1.00_0.01/Shunichi_Dominat.webp"
-            alt="character"
-            width={isMobile ? width * 0.7 : "100%"}
-          />
-        </CharacterImage>
-        <CharacterDescription>
-          <TagContainer>
-            <TagTitle>{t("CV")}</TagTitle>
-            <TagDescription>{t("달소(Dalso, ダルソ)")}</TagDescription>
-          </TagContainer>
-          <TagContainer>
-            <TagTitle>{t("성별")}</TagTitle>
-            <TagDescription>{t("남자")}</TagDescription>
-          </TagContainer>
-          <TagContainer>
-            <TagTitle>{t("나이")}</TagTitle>
-            <TagDescription>{t("n살", {n: 20})}</TagDescription>
-          </TagContainer>
-          <TagContainer>
-            <TagTitle>{t("키")}</TagTitle>
-            <TagDescription>{t("ncm", {n: 185})}</TagDescription>
-          </TagContainer>
-          <TagContainer>
-            <TagTitle>{t("체중")}</TagTitle>
-            <TagDescription>{t("nkg", {n: 72})}</TagDescription>
-          </TagContainer>
-          <TagContainer>
-            <TagTitle>{t("생일")}</TagTitle>
-            <TagDescription>{t("n월 m일", {n: 12, m: 1})}</TagDescription>
-          </TagContainer>
-          <TagContainer>
-            <TagTitle>{t("좋아하는 것")}</TagTitle>
-            <TagDescription>{t("달콤한 것(디저트 류)")}</TagDescription>
-          </TagContainer>
-          <TagContainer>
-            <TagTitle>{t("싫어하는 것")}</TagTitle>
-            <TagDescription>
-              {t("불필요한 것(하단 스토리에서 언급)")}
-            </TagDescription>
-          </TagContainer>
-          <TagContainer>
-            <TagTitle>{t("언어")}</TagTitle>
-            <TagDescription>{t("일본어")}</TagDescription>
-          </TagContainer>
-        </CharacterDescription>
-      </CharacterContainer>
+      <Contents>
+        <CharacterContainer>
+          <CharacterImage>
+            <img
+              style={{margin: -10}}
+              src="https://static.wixstatic.com/media/2c6226_362a05829cbb4fa798450b4527220009~mv2_d_3500_7016_s_4_2.png/v1/crop/x_0,y_6,w_3033,h_7010/fill/w_520,h_1202,al_c,q_90,usm_0.66_1.00_0.01/Shunichi_Dominat.webp"
+              alt="character"
+              width={isMobile ? width * 0.7 : "100%"}
+            />
+          </CharacterImage>
+          <CharacterDescription>
+            <TagContainer>
+              <TagTitle>{t("CV")}</TagTitle>
+              <TagDescription>{t("달소(Dalso, ダルソ)")}</TagDescription>
+            </TagContainer>
+            <TagContainer>
+              <TagTitle>{t("성별")}</TagTitle>
+              <TagDescription>{t("남자")}</TagDescription>
+            </TagContainer>
+            <TagContainer>
+              <TagTitle>{t("나이")}</TagTitle>
+              <TagDescription>{t("n살", {n: 20})}</TagDescription>
+            </TagContainer>
+            <TagContainer>
+              <TagTitle>{t("키")}</TagTitle>
+              <TagDescription>{t("ncm", {n: 185})}</TagDescription>
+            </TagContainer>
+            <TagContainer>
+              <TagTitle>{t("체중")}</TagTitle>
+              <TagDescription>{t("nkg", {n: 72})}</TagDescription>
+            </TagContainer>
+            <TagContainer>
+              <TagTitle>{t("생일")}</TagTitle>
+              <TagDescription>{t("n월 m일", {n: 12, m: 1})}</TagDescription>
+            </TagContainer>
+            <TagContainer>
+              <TagTitle>{t("좋아하는 것")}</TagTitle>
+              <TagDescription>{t("달콤한 것(디저트 류)")}</TagDescription>
+            </TagContainer>
+            <TagContainer>
+              <TagTitle>{t("싫어하는 것")}</TagTitle>
+              <TagDescription>
+                {t("불필요한 것(하단 스토리에서 언급)")}
+              </TagDescription>
+            </TagContainer>
+            <TagContainer>
+              <TagTitle>{t("언어")}</TagTitle>
+              <TagDescription>{t("일본어")}</TagDescription>
+            </TagContainer>
+          </CharacterDescription>
+        </CharacterContainer>
+        <SampleContainer>
+          <TagTitle>{t("샘플")}</TagTitle>
+          <SampleCard />
+          <SampleCard />
+          <SampleCard />
+          <SampleCard />
+        </SampleContainer>
+      </Contents>
     </Container>
   );
 };
