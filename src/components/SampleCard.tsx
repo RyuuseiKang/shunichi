@@ -12,7 +12,7 @@ const Container = styled.div`
   margin: 30px;
   border-radius: 5px;
 
-  background: rgba(44, 44, 44, 0.3);
+  background: rgba(55, 56, 55, 0.3);
   backdrop-filter: saturate(120%) blur(2px);
 
   transition: backdrop-filter 0.3s ease-in-out;
@@ -22,17 +22,25 @@ const DescriptionContainer = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
-  padding: 0px 10px;
+  padding: 0px 10px 0px 20px;
   justify-content: center;
   align-items: center;
+
+  text-shadow: 0px 0px 10px #33333333;
 `;
 
-const Title = styled.p`
+const Title = styled.span`
   text-align: center;
   font-weight: bold;
+  padding-top: 20px;
+`;
+
+const Type = styled.p`
+  text-align: center;
 `;
 
 const OriginalTag = styled.a`
+  padding: 10px 0px 3px 0px;
   color: #e1282f;
   text-decoration: none;
   background: linear-gradient(#e1282f, #e1282f) bottom / 0 0.1em no-repeat;
@@ -85,8 +93,10 @@ const SampleCard: React.FC<Props> = ({
           />
         </div>
         <DescriptionContainer>
-          <Title>{title + " (ust." + ustWriter + ")"}</Title>
-          <p>{t(type)}</p>
+          <div>
+            <Title>{title + " (ust." + ustWriter + ")"}</Title>
+            <Type>{t(type)}</Type>
+          </div>
           <OriginalTag
             href={originalVideo}
             target="_blank"
