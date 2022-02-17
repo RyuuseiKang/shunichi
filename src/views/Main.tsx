@@ -49,12 +49,16 @@ const Button = styled.button`
 
   &:hover {
     background-color: #f73d20;
+    cursor: pointer;
   }
 `;
 
 const ButtonDescription = styled.span`
   color: #fff;
   font-weight: bold;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const CharacterContainer = styled.div`
@@ -150,11 +154,11 @@ const Main: React.FC = () => {
           <div>
             <CharacterName>{t("마루네 슌이치")}</CharacterName>
           </div>
-          <Button>
-            <Link to="/download">
+          <Link to="/download">
+            <Button>
               <ButtonDescription>{t("VB 다운로드")}</ButtonDescription>
-            </Link>
-          </Button>
+            </Button>
+          </Link>
         </HeaderPadder>
       </Header>
       <CharacterContainer>
