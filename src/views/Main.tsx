@@ -233,6 +233,9 @@ const Main: React.FC = () => {
           <SampleCard />
           <SampleCard />
           <SampleCard />
+          <SampleCard />
+          <SampleCard />
+          <SampleCard />
         </SampleContainer>
       </Contents>
     </Container>
