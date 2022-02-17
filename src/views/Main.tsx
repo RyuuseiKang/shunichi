@@ -9,6 +9,8 @@ import {useMediaQuery} from "react-responsive";
 import useWindowDimensions from "../hooks/windowDimensions";
 import SampleCard from "../components/SampleCard";
 
+import {sample} from "../assets/samples";
+
 const Container = styled.div`
   display: flex;
   justify-content: center;
@@ -31,7 +33,7 @@ const Header = styled.div`
   position: sticky;
   top: 0;
   width: 100%;
-  z-index: 2;
+  z-index: 3;
   backdrop-filter: saturate(120%) blur(10px);
 `;
 
@@ -94,6 +96,8 @@ const CharacterName = styled.span`
 `;
 
 const TagContainer = styled.div`
+  display: flex;
+  flex-direction: column;
   padding-bottom: 15px;
   text-shadow: 0px 0px 10px #333333;
 `;
@@ -110,12 +114,19 @@ const TagTitle = styled.span`
   }
 `;
 
-const TagDescription = styled.p`
+const TagDescription = styled.span`
+  padding-top: 10px;
+  padding-bottom: 15px;
   padding-left: 30px;
   font-size: 1.1em;
 `;
 
-const SampleContainer = styled.div``;
+const SampleContainer = styled.div`
+  max-width: 880px;
+  margin: 0px 22px;
+`;
+
+const FooterContainer = styled.div``;
 
 const Main: React.FC = () => {
   const {width} = useWindowDimensions();
@@ -230,15 +241,21 @@ const Main: React.FC = () => {
           </CharacterContainer>
           <SampleContainer>
             <TagTitle>{t("샘플")}</TagTitle>
-            <SampleCard fadeDirection="left" title="" description="" link="" />
-            <SampleCard fadeDirection="right" title="" description="" link="" />
-            <SampleCard fadeDirection="left" title="" description="" link="" />
-            <SampleCard fadeDirection="right" title="" description="" link="" />
-            <SampleCard fadeDirection="left" title="" description="" link="" />
-            <SampleCard fadeDirection="right" title="" description="" link="" />
-            <SampleCard fadeDirection="left" title="" description="" link="" />
+            {sample.map((item, index) => {
+              return (
+                <SampleCard
+                  fadeDirection={index % 2 ? "left" : "right"}
+                  title={item.title}
+                  type={item.type}
+                  ustWriter={item.ust_writer}
+                  originalVideo={item.original_video}
+                  link={item.link}
+                />
+              );
+            })}
           </SampleContainer>
         </Contents>
+        <FooterContainer></FooterContainer>
       </Container>
     </>
   );

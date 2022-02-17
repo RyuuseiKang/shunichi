@@ -2,24 +2,55 @@ import React, {useEffect} from "react";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
+
 import styled from "styled-components";
+import {t} from "i18next";
 
 const Container = styled.div`
   display: flex;
   padding: 10px;
   margin: 30px;
+  border-radius: 5px;
 
-  background: rgba(77, 77, 77, 0.3);
+  background: rgba(44, 44, 44, 0.3);
   backdrop-filter: saturate(120%) blur(2px);
 
   transition: backdrop-filter 0.3s ease-in-out;
 `;
 
-const DescriptionContainer = styled.div``;
+const DescriptionContainer = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 0px 10px;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Title = styled.p`
+  text-align: center;
+  font-weight: bold;
+`;
+
+const OriginalTag = styled.a`
+  color: #e1282f;
+  text-decoration: none;
+  background: linear-gradient(#e1282f, #e1282f) bottom / 0 0.1em no-repeat;
+  transition: 0.3s background-size ease-in-out;
+  background-size: 0% 0.1em;
+
+  &:hover {
+    background-size: 100% 0.1em;
+
+    background-position: left bottom;
+  }
+`;
 
 type Props = {
   title: string;
-  description: string;
+  type: string;
+  ustWriter: string;
+  originalVideo: string;
   link: string;
 
   fadeDirection: "left" | "right" | "up" | "down";
@@ -27,8 +58,10 @@ type Props = {
 
 const SampleCard: React.FC<Props> = ({
   title,
-  description,
+  type,
+  ustWriter,
   link,
+  originalVideo,
   fadeDirection,
 }) => {
   useEffect(() => {
@@ -40,12 +73,27 @@ const SampleCard: React.FC<Props> = ({
   return (
     <div data-aos={"fade-" + fadeDirection} data-aos-delay="300">
       <Container>
-        <img
-          src={"https://i.ytimg.com/vi_webp/qLrzmnYgPdI/sddefault.webp"}
-          width={300}
-        />
+        <div>
+          <iframe
+            width="500px"
+            height="300px"
+            src={`https://www.youtube.com/embed/${link}`}
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            title={title}
+          />
+        </div>
         <DescriptionContainer>
-          <p>アーネスト(Ernest)</p>
+          <Title>{title + " (ust." + ustWriter + ")"}</Title>
+          <p>{t(type)}</p>
+          <OriginalTag
+            href={originalVideo}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {t("본가")}
+          </OriginalTag>
         </DescriptionContainer>
       </Container>
     </div>
