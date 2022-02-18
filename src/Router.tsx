@@ -2,7 +2,6 @@ import React from "react";
 import {Route, Routes, Navigate} from "react-router-dom";
 import NotFound from "./views/404";
 import Main from "./views/Main";
-import Download from "./views/Download";
 
 const Router: React.FC = () => {
   return (
