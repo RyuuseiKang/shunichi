@@ -15,6 +15,7 @@ import SampleCard from "../components/SampleCard";
 
 import {sample} from "../assets/samples";
 import {details} from "../assets/details";
+import DownloadCard from "../components/DownloadCard";
 
 const Container = styled.div`
   justify-content: center;
@@ -47,7 +48,7 @@ const Header = styled.div`
   padding: 15px 0px;
   display: flex;
   justify-content: center;
-  position: sticky;
+  position: fixed;
   top: 0;
   width: 100%;
   z-index: 3;
@@ -136,14 +137,11 @@ const TagTitle = styled.span`
 const rightToLeft = keyframes`
   0% {
     opacity: 0;
-    transform: translateX(300px);
+    transform: translateX(150px);
   }
   100% {
     opacity: 1;
     transform: translateX(0);
-  }
-  101%{
-    opacity: 1;
   }
 `;
 
@@ -153,8 +151,8 @@ const TagDescription = styled.span<{delay: number}>`
   padding-left: 30px;
   font-size: 1.1em;
   opacity: 0;
-  animation: ${rightToLeft} 1s ${({delay}) => `${delay.toString()}00ms`}
-    ease-in-out forwards;
+  animation: ${rightToLeft} 0.7s ${({delay}) => `${delay.toString()}s`}
+    cubic-bezier(0.25, 1, 0.5, 1) forwards;
 `;
 
 const LinkTag = styled.a`
@@ -166,7 +164,7 @@ const LinkTag = styled.a`
 const SampleContainer = styled.div`
   justify-content: center;
   margin: 0px 22px;
-  padding: 20px 0px;
+  padding: 60px 0px 0px 0px;
 `;
 
 const DefaultDesignContainer = styled.div`
@@ -174,7 +172,7 @@ const DefaultDesignContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   margin: 0px 22px;
-  padding: 20px 0px;
+  padding: 60px 0px 0px 0px;
 `;
 
 const DefaultDesignImageContainer = styled.div`
@@ -192,7 +190,27 @@ const UserTag = styled.span`
   padding-left: 20px;
 `;
 
-const FooterContainer = styled.div``;
+const DownloadContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0px 22px;
+  padding: 60px 0px 0px 0px;
+`;
+
+const DownloadGridContainer = styled.div<{isMobile: boolean}>`
+  display: grid;
+
+  grid-template-columns: ${({isMobile}) => `repeat(${isMobile ? 1 : 2}, 1fr)`};
+  grid-gap: 20px;
+
+  padding: 30px;
+`;
+
+const FooterContainer = styled.p`
+  padding: 30px;
+  text-align: center;
+`;
 
 const Main: React.FC = () => {
   const {width} = useWindowDimensions();
@@ -209,8 +227,8 @@ const Main: React.FC = () => {
               color: "#ffffff",
               distance: 70,
               enable: true,
-              opacity: 0.15,
-              width: 1,
+              opacity: 0.2,
+              width: 2,
             },
             move: {
               bounce: false,
@@ -245,11 +263,11 @@ const Main: React.FC = () => {
           <div>
             <CharacterName>{t("마루네 슌이치")}</CharacterName>
           </div>
-          <Link to="/download">
+          <a href="#download">
             <Button>
               <ButtonDescription>{t("VB 다운로드")}</ButtonDescription>
             </Button>
-          </Link>
+          </a>
         </HeaderPadder>
       </Header>
       <ContentsContainer>
@@ -271,7 +289,7 @@ const Main: React.FC = () => {
                     <TagTitle>{t(item.title)}</TagTitle>
                     {item.description.map((description, j) => {
                       return (
-                        <TagDescription delay={i}>
+                        <TagDescription delay={i * 0.15}>
                           {t(description, item?.descriptionOption[j])}
                         </TagDescription>
                       );
@@ -296,7 +314,7 @@ const Main: React.FC = () => {
               </TagContainer>
             </CharacterDescription>
           </CharacterContainer>
-          <SampleContainer>
+          <SampleContainer id="sample">
             <TagTitle>{t("샘플")}</TagTitle>
             {sample.map((item, index) => {
               return (
@@ -311,7 +329,7 @@ const Main: React.FC = () => {
               );
             })}
           </SampleContainer>
-          <DefaultDesignContainer>
+          <DefaultDesignContainer id="default">
             <TagTitle>{t("디폴트 디자인")}</TagTitle>
             <DefaultDesignImageContainer>
               <img
@@ -337,9 +355,58 @@ const Main: React.FC = () => {
               </DefailtDesignDescription>
             </DefaultDesignImageContainer>
           </DefaultDesignContainer>
+
+          <DownloadContainer id="download">
+            <TagTitle>{t("VB 다운로드")}</TagTitle>
+            <DownloadGridContainer isMobile={isMobile}>
+              <DownloadCard
+                type={"단음"}
+                language={"일본어"}
+                download={
+                  "http://www.mediafire.com/file/i3f5gd44tw5g3gw/Marune%20Shunichi.zip"
+                }
+              />
+              <DownloadCard
+                type={"연속음"}
+                language={"일본어"}
+                download={
+                  "http://www.mediafire.com/file/e0d1oc0uc3ksdud/Marune_Shunichi_VCV_%EA%BA%9A.zip"
+                }
+              />
+              <DownloadCard
+                type={"Vivid"}
+                language={"일본어"}
+                download={
+                  "http://www.mediafire.com/file/cp7poeeb709thsk/Shunichi-Vivid.zip"
+                }
+              />
+              <DownloadCard
+                type={"Warm"}
+                language={"일본어"}
+                download={
+                  "http://www.mediafire.com/file/ydxxte1lk936ted/Shunichi-Warm.zip"
+                }
+              />
+              <DownloadCard
+                type={"Dominant(강음원 + 속삭임)"}
+                language={"일본어"}
+                download={
+                  "http://www.mediafire.com/file/i2fd5zc3nkqdv87/Shunichi_Append_Dominant.zip/file"
+                }
+              />
+              <DownloadCard
+                type={"Dominant(추가음원, 고음)"}
+                language={"일본어"}
+                password={"Dominant"}
+                download={"https://bowlroll.net/file/178101"}
+              />
+            </DownloadGridContainer>
+          </DownloadContainer>
         </Contents>
       </ContentsContainer>
-      <FooterContainer></FooterContainer>
+      <FooterContainer>
+        Copyright © {new Date().getFullYear()} Dalso All Rights Reserved.
+      </FooterContainer>
     </Container>
   );
 };

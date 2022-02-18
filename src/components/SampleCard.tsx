@@ -81,17 +81,15 @@ const SampleCard: React.FC<Props> = ({
   return (
     <div data-aos={"fade-" + fadeDirection} data-aos-delay="300">
       <Container>
-        <div>
-          <iframe
-            width="500px"
-            height="300px"
-            src={`https://www.youtube.com/embed/${link}`}
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            title={title}
-          />
-        </div>
+        <iframe
+          width="430px"
+          height="300px"
+          src={`https://www.youtube.com/embed/${link}`}
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          title={title}
+        />
         <DescriptionContainer>
           <div>
             <Title>{title + " (ust." + ustWriter + ")"}</Title>
