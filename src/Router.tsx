@@ -8,7 +8,6 @@ const Router: React.FC = () => {
   return (
     <Routes>
       <Route path="/" element={<Main />} />
-      <Route path="/download" element={<Download />} />
       <Route path="/404" element={<NotFound />} />
 
       <Route path="*" element={<Navigate to="/404" />} />
