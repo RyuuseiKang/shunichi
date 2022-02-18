@@ -3,7 +3,7 @@ import React, {useEffect} from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
 import {t} from "i18next";
 
 const Container = styled.div`
@@ -46,8 +46,11 @@ const OriginalTag = styled.a`
   background: linear-gradient(#e1282f, #e1282f) bottom / 0 0.1em no-repeat;
   transition: 0.3s background-size ease-in-out;
   background-size: 0% 0.1em;
+  background-position: left bottom;
 
   &:hover {
+    background: linear-gradient(#e1282f, #e1282f) bottom / 0 0.1em no-repeat;
+
     background-size: 100% 0.1em;
 
     background-position: left bottom;
