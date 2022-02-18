@@ -42,7 +42,7 @@ export const details: Array<Detail> = [
   },
   {
     title: "싫어하는 것",
-    description: ["불필요한 것(하단 스토리에서 언급)"],
+    description: ["불필요한 것"],
     descriptionOption: [],
   },
   {
