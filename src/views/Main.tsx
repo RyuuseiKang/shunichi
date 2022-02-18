@@ -7,7 +7,6 @@ import Particles from "react-tsparticles";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEnvelope} from "@fortawesome/free-solid-svg-icons";
 import {faTwitter} from "@fortawesome/free-brands-svg-icons";
-import {Link} from "react-router-dom";
 import {useMediaQuery} from "react-responsive";
 
 import useWindowDimensions from "../hooks/windowDimensions";
@@ -68,14 +67,18 @@ const HeaderPadder = styled.div`
 `;
 
 const Button = styled.button`
-  padding: 5px 20px;
-  background-color: #e1282f;
-  border: none;
+  padding: 5px 10px;
+  background: #33333333;
+  color: #ffffff;
   border-radius: 20px;
+  border: solid #e1282f;
+
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+
+  cursor: pointer;
 
   &:hover {
-    background-color: #f73d20;
-    cursor: pointer;
+    background: #e1282f53;
   }
 `;
 
@@ -89,7 +92,7 @@ const ButtonDescription = styled.span`
 
 const CharacterContainer = styled.div`
   display: flex;
-  padding-top: 50px;
+  margin-top: 150px;
   justify-content: flex-end;
   z-index: 3;
 `;
@@ -283,13 +286,12 @@ const Main: React.FC = () => {
             </CharacterImage>
             <CharacterDescription>
               {details.map((item, i) => {
-                console.log(i);
                 return (
-                  <TagContainer>
-                    <TagTitle>{t(item.title)}</TagTitle>
+                  <TagContainer key={item.title + "-container"}>
+                    <TagTitle key={item.title}>{t(item.title)}</TagTitle>
                     {item.description.map((description, j) => {
                       return (
-                        <TagDescription delay={i * 0.15}>
+                        <TagDescription key={description} delay={i * 0.15}>
                           {t(description, item?.descriptionOption[j])}
                         </TagDescription>
                       );
@@ -319,6 +321,7 @@ const Main: React.FC = () => {
             {sample.map((item, index) => {
               return (
                 <SampleCard
+                  key={item.title}
                   fadeDirection={index % 2 ? "left" : "right"}
                   title={item.title}
                   type={item.type}

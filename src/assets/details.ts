@@ -73,7 +73,7 @@ export const details: Array<Detail> = [
   },
   {
     title: "일러스트",
-    description: ["DANG님 + TOK님(Dominant)"],
+    description: ["DANG님", "TOK님(Dominant)"],
     descriptionOption: [],
   },
 ];
