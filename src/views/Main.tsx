@@ -1,7 +1,7 @@
 import {t} from "i18next";
 import React from "react";
 
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
 
 import Particles from "react-tsparticles";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -14,9 +14,9 @@ import useWindowDimensions from "../hooks/windowDimensions";
 import SampleCard from "../components/SampleCard";
 
 import {sample} from "../assets/samples";
+import {details} from "../assets/details";
 
 const Container = styled.div`
-  display: flex;
   justify-content: center;
   align-items: center;
   font-family: "Pretendard", "Kosugi";
@@ -24,10 +24,20 @@ const Container = styled.div`
   background: #262526;
   color: #fff;
   z-index: 2;
+  overflow: hidden;
+`;
+
+const ContentsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Contents = styled.div`
-  padding: 50px 0px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
   max-width: 920px;
 `;
 
@@ -79,7 +89,7 @@ const ButtonDescription = styled.span`
 const CharacterContainer = styled.div`
   display: flex;
   padding-top: 50px;
-  justify-content: right;
+  justify-content: flex-end;
   z-index: 3;
 `;
 
@@ -123,11 +133,28 @@ const TagTitle = styled.span`
   }
 `;
 
-const TagDescription = styled.span`
+const rightToLeft = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateX(300px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  101%{
+    opacity: 1;
+  }
+`;
+
+const TagDescription = styled.span<{delay: number}>`
   padding-top: 10px;
   padding-bottom: 0px;
   padding-left: 30px;
   font-size: 1.1em;
+  opacity: 0;
+  animation: ${rightToLeft} 1s ${({delay}) => `${delay.toString()}00ms`}
+    ease-in-out forwards;
 `;
 
 const LinkTag = styled.a`
@@ -156,6 +183,15 @@ const DefaultDesignImageContainer = styled.div`
   flex-direction: column;
 `;
 
+const DefailtDesignDescription = styled.span`
+  text-align: right;
+  padding-top: 10px;
+`;
+
+const UserTag = styled.span`
+  padding-left: 20px;
+`;
+
 const FooterContainer = styled.div``;
 
 const Main: React.FC = () => {
@@ -163,7 +199,7 @@ const Main: React.FC = () => {
   const isMobile = useMediaQuery({maxWidth: 767});
 
   return (
-    <>
+    <Container>
       <Particles
         options={{
           fpsLimit: 60,
@@ -171,9 +207,9 @@ const Main: React.FC = () => {
             color: {value: "#ffffff"},
             line_linked: {
               color: "#ffffff",
-              distance: 30,
+              distance: 70,
               enable: true,
-              opacity: 0.09,
+              opacity: 0.15,
               width: 1,
             },
             move: {
@@ -182,15 +218,15 @@ const Main: React.FC = () => {
               enable: true,
               out_mode: "out",
               random: true,
-              speed: 0.15,
+              speed: 0.3,
               straight: true,
             },
-            number: {density: {enable: true, value_area: 500}, value: 300},
+            number: {density: {enable: true, value_area: 650}, value: 85},
             opacity: {
-              anim: {enable: true, opacity_min: 0.2, speed: 1, sync: false},
+              anim: {enable: true, opacity_min: 0.3, speed: 1, sync: false},
               random: {
                 enable: true,
-                minimumValue: 0.2,
+                minimumValue: 0.7,
               },
               value: 0.6,
             },
@@ -198,26 +234,25 @@ const Main: React.FC = () => {
               type: "circle",
             },
             size: {
-              anim: {enable: false, size_min: 0.3, speed: 4, sync: false},
               random: false,
               value: 1,
             },
           },
         }}
       />
-      <Container>
-        <Header>
-          <HeaderPadder>
-            <div>
-              <CharacterName>{t("마루네 슌이치")}</CharacterName>
-            </div>
-            <Link to="/download">
-              <Button>
-                <ButtonDescription>{t("VB 다운로드")}</ButtonDescription>
-              </Button>
-            </Link>
-          </HeaderPadder>
-        </Header>
+      <Header>
+        <HeaderPadder>
+          <div>
+            <CharacterName>{t("마루네 슌이치")}</CharacterName>
+          </div>
+          <Link to="/download">
+            <Button>
+              <ButtonDescription>{t("VB 다운로드")}</ButtonDescription>
+            </Button>
+          </Link>
+        </HeaderPadder>
+      </Header>
+      <ContentsContainer>
         <Contents>
           <CharacterContainer>
             <CharacterImage isMobile={isMobile}>
@@ -229,85 +264,30 @@ const Main: React.FC = () => {
               />
             </CharacterImage>
             <CharacterDescription>
-              <TagContainer>
-                <TagTitle>{t("CV")}</TagTitle>
-                <TagDescription>{t("달소(Dalso, ダルソ)")}</TagDescription>
-              </TagContainer>
-              <TagContainer>
-                <TagTitle>{t("성별")}</TagTitle>
-                <TagDescription>{t("남자")}</TagDescription>
-              </TagContainer>
-              <TagContainer>
-                <TagTitle>{t("나이")}</TagTitle>
-                <TagDescription>{t("n살", {n: 20})}</TagDescription>
-              </TagContainer>
-              <TagContainer>
-                <TagTitle>{t("키")}</TagTitle>
-                <TagDescription>{t("ncm", {n: 185})}</TagDescription>
-              </TagContainer>
-              <TagContainer>
-                <TagTitle>{t("체중")}</TagTitle>
-                <TagDescription>{t("nkg", {n: 72})}</TagDescription>
-              </TagContainer>
-              <TagContainer>
-                <TagTitle>{t("생일")}</TagTitle>
-                <TagDescription>{t("n월 m일", {n: 12, m: 1})}</TagDescription>
-              </TagContainer>
-              <TagContainer>
-                <TagTitle>{t("좋아하는 것")}</TagTitle>
-                <TagDescription>{t("달콤한 것(디저트 류)")}</TagDescription>
-              </TagContainer>
-              <TagContainer>
-                <TagTitle>{t("싫어하는 것")}</TagTitle>
-                <TagDescription>
-                  {t("불필요한 것(하단 스토리에서 언급)")}
-                </TagDescription>
-              </TagContainer>
-              <TagContainer>
-                <TagTitle>{t("음원 가공 가능 여부")}</TagTitle>
-                <TagDescription>
-                  {t("가능(라이브에 한해서 조절만을 허가)")}
-                </TagDescription>
-                <TagDescription>
-                  {t("음원의 음을 조절하거나 피치를 올리거나 내리는 것을 허가")}
-                </TagDescription>
-              </TagContainer>
-              <TagContainer>
-                <TagTitle>{t("파생 캐릭터 생성 가능 여부")}</TagTitle>
-                <TagDescription>{t("NO")}</TagDescription>
-              </TagContainer>
-              <TagContainer>
-                <TagTitle>{t("상업적 이용")}</TagTitle>
-                <TagDescription>
-                  {t("CV에게 연락을 부탁드립니다.")}
-                </TagDescription>
-              </TagContainer>
-              <TagContainer>
-                <TagTitle>{t("2차 창작의 허용 가능 범위")}</TagTitle>
-                <TagDescription>
-                  {t("성적 표현 가능 (BL: R-18+, N/HL: R-15)")}
-                </TagDescription>
-                <TagDescription>
-                  {t("유혈 가능, 내장 또는 신체 절단 등의 묘화 불가")}
-                </TagDescription>
-              </TagContainer>
-              <TagContainer>
-                <TagTitle>{t("Youtube, 니코니코동화에 투고")}</TagTitle>
-                <TagDescription>{t("가능")}</TagDescription>
-              </TagContainer>
-              <TagContainer>
-                <TagTitle>{t("일러스트")}</TagTitle>
-                <TagDescription>{t("DANG님 + TOK님(Dominant)")}</TagDescription>
-              </TagContainer>
+              {details.map((item, i) => {
+                console.log(i);
+                return (
+                  <TagContainer>
+                    <TagTitle>{t(item.title)}</TagTitle>
+                    {item.description.map((description, j) => {
+                      return (
+                        <TagDescription delay={i}>
+                          {t(description, item?.descriptionOption[j])}
+                        </TagDescription>
+                      );
+                    })}
+                  </TagContainer>
+                );
+              })}
               <TagContainer>
                 <TagTitle>{t("연락")}</TagTitle>
-                <TagDescription>
+                <TagDescription delay={0}>
                   <FontAwesomeIcon icon={faTwitter} />
                   <LinkTag href="https://twitter.com/Dalso_ON">
                     {t("@Dalso_ON")}
                   </LinkTag>
                 </TagDescription>
-                <TagDescription>
+                <TagDescription delay={0}>
                   <FontAwesomeIcon icon={faEnvelope}></FontAwesomeIcon>
                   <LinkTag href="mailto: ksh12947@gmail.com">
                     {t("ksh12947@gmail.com")}
@@ -346,12 +326,21 @@ const Main: React.FC = () => {
                   "https://static.wixstatic.com/media/2c6226_77f6623c67bc438381ce502f7d69eb58~mv2_d_3000_2500_s_4_2.png/v1/fill/w_852,h_708,al_c,q_90,usm_0.66_1.00_0.01/%EC%9A%B0%EC%8B%9C%EB%A1%9C.webp"
                 }
               />
+              <DefailtDesignDescription>
+                {t("일러스트")}
+                <UserTag>
+                  <FontAwesomeIcon icon={faTwitter} />
+                  <LinkTag href="https://twitter.com/myni_2362">
+                    {t("마이니님(@myni_2362)")}
+                  </LinkTag>
+                </UserTag>
+              </DefailtDesignDescription>
             </DefaultDesignImageContainer>
           </DefaultDesignContainer>
         </Contents>
-        <FooterContainer></FooterContainer>
-      </Container>
-    </>
+      </ContentsContainer>
+      <FooterContainer></FooterContainer>
+    </Container>
   );
 };
 
