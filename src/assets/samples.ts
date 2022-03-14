@@ -27,4 +27,11 @@ export const sample = [
     original_video: "https://youtu.be/HREVUGQqnIc",
     link: "tmdjmBzYcj8",
   },
+  {
+    title: "アイデンティティ",
+    type: "Append Dominant",
+    ust_writer: "GGOPU",
+    original_video: "https://youtu.be/HREVUGQqnIc",
+    link: "tmdjmBzYcj8",
+  },
 ];
