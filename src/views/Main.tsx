@@ -11,10 +11,11 @@ import {useMediaQuery} from "react-responsive";
 
 import useWindowDimensions from "../hooks/windowDimensions";
 import SampleCard from "../components/SampleCard";
+import DownloadCard from "../components/DownloadCard";
 
 import {sample} from "../assets/samples";
 import {details} from "../assets/details";
-import DownloadCard from "../components/DownloadCard";
+import {vb} from "../assets/vb";
 
 const Container = styled.div`
   justify-content: center;
@@ -362,47 +363,16 @@ const Main: React.FC = () => {
           <DownloadContainer id="download">
             <TagTitle>{t("VB 다운로드")}</TagTitle>
             <DownloadGridContainer isMobile={isMobile}>
-              <DownloadCard
-                type={"단음"}
-                language={"일본어"}
-                download={
-                  "http://www.mediafire.com/file/i3f5gd44tw5g3gw/Marune%20Shunichi.zip"
-                }
-              />
-              <DownloadCard
-                type={"연속음"}
-                language={"일본어"}
-                download={
-                  "http://www.mediafire.com/file/e0d1oc0uc3ksdud/Marune_Shunichi_VCV_%EA%BA%9A.zip"
-                }
-              />
-              <DownloadCard
-                type={"Vivid"}
-                language={"일본어"}
-                download={
-                  "http://www.mediafire.com/file/cp7poeeb709thsk/Shunichi-Vivid.zip"
-                }
-              />
-              <DownloadCard
-                type={"Warm"}
-                language={"일본어"}
-                download={
-                  "http://www.mediafire.com/file/ydxxte1lk936ted/Shunichi-Warm.zip"
-                }
-              />
-              <DownloadCard
-                type={"Dominant(강음원 + 속삭임)"}
-                language={"일본어"}
-                download={
-                  "http://www.mediafire.com/file/i2fd5zc3nkqdv87/Shunichi_Append_Dominant.zip/file"
-                }
-              />
-              <DownloadCard
-                type={"Dominant(추가음원, 고음)"}
-                language={"일본어"}
-                password={"Dominant"}
-                download={"https://bowlroll.net/file/178101"}
-              />
+              {vb.map((item, index) => {
+                return (
+                  <DownloadCard
+                    type={item.type}
+                    language={item.language}
+                    download={item.download}
+                    password={item.password == "" ? undefined : item.password}
+                  />
+                );
+              })}
             </DownloadGridContainer>
           </DownloadContainer>
         </Contents>
