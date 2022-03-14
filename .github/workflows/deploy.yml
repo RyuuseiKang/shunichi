@@ -26,6 +26,7 @@ jobs:
         run: yarn run predeploy
         env:
           NODE_ENV: production
+          CI: ""
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v2.5.0
         env:
